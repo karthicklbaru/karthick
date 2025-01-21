@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker Alert</title>
+</head>
+<body>
+    <h1>Click anywhere to see something...</h1>
+
+    <script>
+        document.addEventListener("click", function() {
+            // Request permission on click
+            if (Notification.permission !== "granted") {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        showNotification();
+                    } else {
+                        alert("Please allow notifications to see the message.");
+                    }
+                });
+            } else {
+                showNotification();
+            }
+        });
+
+        function showNotification() {
+            new Notification("Warning!", {
+                body: "You are hacked!",
+                icon: "https://cdn-icons-png.flaticon.com/512/616/616489.png"  // Add an icon for better visibility
+            });
+        }
+    </script>
+</body>
+</html>
